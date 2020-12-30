@@ -44,7 +44,7 @@ function set(){
     //appending child
     transaction.appendChild(transHeading);
     transaction.appendChild(transAmount);
-    list.appendChild(transaction);
+    list.prepend(transaction);
     ide++;
 
     //resetting the content 
