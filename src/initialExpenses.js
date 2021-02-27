@@ -1,108 +1,129 @@
 const expenses= [
     {
-        where:"ravi",
+        where:"Ravi",
         howMuch:"55",
-        when:"12/12/20"
+        when:"12/12/20",
+        method:"online"
     },
     {
-        where:"ravi",
+        where:"Ravi",
         howMuch:"55",
-        when:"12/12/20"
+        when:"12/12/20",
+        method:"online"
     },    
     {
-        where:"ravi",
+        where:"Ravi",
         howMuch:"55",
-        when:"12/12/20"
+        when:"12/12/20",
+        method:"online"
     },    
     {
-        where:"ravi",
+        where:"Ravi",
         howMuch:"55",
-        when:"12/12/20"
+        when:"12/12/20",
+        method:"online"
     },    
     {
-        where:"ravi",
+        where:"Ravi",
         howMuch:"55",
-        when:"12/12/20"
+        when:"12/12/20",
+        method:"online"
     },    
     {
-        where:"ravi",
+        where:"Ravi",
         howMuch:"55",
-        when:"12/12/20"
+        when:"12/12/20",
+        method:"online"
     },    
     {
-        where:"ravi",
+        where:"Ravi",
         howMuch:"55",
-        when:"12/12/20"
+        when:"12/12/20",
+        method:"online"
     },
     {
-        where:"ravi",
+        where:"Ravi",
         howMuch:"55",
-        when:"12/12/20"
+        when:"12/12/20",
+        method:"online"
     },
     {
-        where:"ravi",
+        where:"Ravi",
         howMuch:"55",
-        when:"12/12/20"
+        when:"12/12/20",
+        method:"online"
     },    
     {
-        where:"ravi",
+        where:"Ravi",
         howMuch:"55",
-        when:"12/12/20"
+        when:"12/12/20",
+        method:"online"
     },    
     {
-        where:"ravi",
+        where:"Ravi",
         howMuch:"55",
-        when:"12/12/20"
+        when:"12/12/20",
+        method:"online"
     },    
     {
-        where:"ravi",
+        where:"Ravi",
         howMuch:"55",
-        when:"12/12/20"
+        when:"12/12/20",
+        method:"online"
     },    
     {
-        where:"ravi",
+        where:"Ravi",
         howMuch:"55",
-        when:"12/12/20"
+        when:"12/12/20",
+        method:"online"
     },    
     {
-        where:"ravi",
+        where:"Ravi",
         howMuch:"55",
-        when:"12/12/20"
+        when:"12/12/20",
+        method:"online"
     },
     {
-        where:"ravi",
+        where:"Ravi",
         howMuch:"55",
-        when:"12/12/20"
+        when:"12/12/20",
+        method:"online"
     },
     {
-        where:"ravi",
+        where:"Ravi",
         howMuch:"55",
-        when:"12/12/20"
+        when:"12/12/20",
+        method:"online"
     },    
     {
-        where:"ravi",
+        where:"Ravi",
         howMuch:"55",
-        when:"12/12/20"
+        when:"12/12/20",
+        method:"online"
     },    
     {
-        where:"ravi",
+        where:"Ravi",
         howMuch:"55",
-        when:"12/12/20"
+        when:"12/12/20",
+        method:"online"
     },    
     {
-        where:"ravi",
+        where:"Ravi",
         howMuch:"55",
-        when:"12/12/20"
+        when:"12/12/20",
+        method:"online"
     },    
     {
-        where:"ravi",
+        where:"Ravi",
         howMuch:"55",
-        when:"12/12/20"
+        when:"12/12/20",
+        method:"online"
     },    
     {
-        where:"ravi",
+        where:"Ravi",
         howMuch:"55",
-        when:"12/12/20"
+        when:"12/12/20",
+        method:"online"
     }
 ]
 

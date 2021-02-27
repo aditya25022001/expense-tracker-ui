@@ -10,12 +10,9 @@
   padding-top: 4%;
   align-items: center;
   cursor: pointer;
-  margin-bottom: 5%;
+  padding-bottom: 10%;
 }
 .app_header {
-  position: sticky;
-  top: 0;
-  opacity: 1;
   background-color: #fff;
   align-items: center;
   text-align: center;
@@ -46,7 +43,8 @@
 .credit_option,
 .debit_option,
 .cash_option,
-.online_option {
+.online_option,
+.show {
   border: none;
   outline: none;
   outline-offset: none;
@@ -57,4 +55,19 @@
     'Open Sans', 'Helvetica Neue',
     sans-serif;
   cursor: pointer;
+}
+.transaction {
+  width: max-content;
+  margin-bottom: 5%;
+  text-align: center;
+  background-color: rgb(238, 238, 238);
+  border-radius: 2px;
+  padding: 8% 50%;
+  margin-left: -48%;
+}
+.home_back {
+  position: sticky;
+  top: 0;
+  opacity: 1;
+  background-color: #fff;
 }
