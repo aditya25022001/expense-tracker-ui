@@ -1,13 +1,13 @@
 import React, {useState, useEffect} from 'react'
-import HomeRoundedIcon from '@material-ui/icons/HomeRounded';
-import { Link } from 'react-router-dom'
 import { Transaction } from './Transaction';
 import expenses from './initialExpenses'
 import './App.css'
+import firebase from 'firebase'
+import db from './firebase';
 
 export const Expenses = () => {
     
-    const [expensesInit, setExpenses] = useState(expenses)
+    const [expensesInit, setExpenses] = useState([])
 
     const setColor = () => {
         let rvalue = (0.8-Math.random())*255;
@@ -16,20 +16,21 @@ export const Expenses = () => {
         return `rgb(${rvalue}, ${gvalue}, ${bvalue})`
     }
     
+    useEffect(() => {
+      db.collection('expenses').orderBy('when', 'desc').onSnapshot( snapshot => {
+        setExpenses(snapshot.docs.map( doc => ({id:doc.id, expense:doc.data()})))
+      })
+      console.log(expensesInit)
+    },[])
     return (
         <div>
-          <div className="home_back">
-            <Link to="/" style={{ textDecoration:'none', color:setColor() }} >
-                <HomeRoundedIcon style={{ fontSize:40 }} />
-            </Link>
-          </div>
           <div className="expenses" >
             {expensesInit.map(expense => (
               <Transaction 
-                when={expense.when}
-                where={expense.where}
-                howMuch={expense.howMuch}
-                method={expense.method}
+                when={expense.expense.when}
+                where={expense.expense.where}
+                howMuch={expense.expense.howMuch}
+                method={expense.expense.method}
               />
             ))
             }

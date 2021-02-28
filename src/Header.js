@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import './App.css';
 import { Link } from 'react-router-dom'
 import firebase from 'firebase'
@@ -10,6 +10,12 @@ export const Header = () => {
 
     const [warning, setWarning] = useState('');
 
+    const [expense, setExpense] = useState([]);
+
+    const [netCredit, setNetCredit] = useState([]);
+
+    const [netDebit, setNetDebit] = useState([]);
+
     const [inputWhere, setInputWhere] = useState('');
 
     const [inputWhen, setInputWhen] = useState('');
@@ -20,10 +26,26 @@ export const Header = () => {
 
     const [inputMethod, setInputMethod] = useState('');
 
+    const changeSign =() => {
+      let string = inputHowMuch;
+      console.log(string)
+      string='-'+string
+      setInputHowMuch(string)
+      console.log(string)
+      console.log(inputHowMuch)
+    }
+
     const addExpense =() => {
-      if(inputType===''||inputHowMuch===''||inputMethod===''||inputWhere===''||inputWhen===''){
-        setWarning('Please enter all the required values!!!')
+      if(inputType===''
+        ||inputHowMuch===''
+        ||inputMethod===''
+        ||inputWhere===''
+        ||inputWhen===''
+        ||(date.getMonth()+1<inputWhen.slice(5,7) && date.getFullYear()==inputWhen.slice(0,4))
+        ||(date.getDate()<inputWhen.slice(8,) && date.getMonth()+1==inputWhen.slice(5,7))
+        ||date.getFullYear()<inputWhen.slice(0,4)){
         console.log(inputType, inputMethod, inputHowMuch, inputWhen, inputWhere)
+        setWarning('Please give valid details !')
       }
       else{
         db.collection('expenses').add({
@@ -31,17 +53,35 @@ export const Header = () => {
           when:inputWhen,
           howMuch:inputHowMuch,
           method:inputMethod,
-          type:inputType,
-          timestamp:firebase.firestore.FieldValue.serverTimestamp()
+          type:inputType
         })
+        console.log(inputType, inputMethod, inputHowMuch, inputWhen, inputWhere)
         setWarning('')
         setInputHowMuch('')
         setInputMethod('')
         setInputType('')
         setInputWhen('')
         setInputWhere('')
+        console.log(inputType, inputMethod, inputHowMuch, inputWhen, inputWhere)
+        console.log(expense)
       }
     }
+
+    const filterCredit = (e) => {
+      if(e.type=='credit')
+        return e;
+    }
+
+    const filterDebit = (e) => {
+      if(e.type=='debit')
+        return e;
+    }
+
+    useEffect(() => {
+      db.collection('expenses').onSnapshot(snapshot => {
+        setExpense(snapshot.docs.map( doc => doc.data()));
+      })
+    },[])
 
     const setColor = () => {
         let rvalue = (0.8-Math.random())*255;
@@ -50,8 +90,17 @@ export const Header = () => {
         return `rgb(${rvalue}, ${gvalue}, ${bvalue})`
     }
 
+    const setColorExpense =() => {
+      if(expense.map(e => parseInt(e.howMuch)).reduce((a,b) => { return a+b },0)<0)
+        return 'rgb(252,3,3)'
+      if(expense.map(e => parseInt(e.howMuch)).reduce((a,b) => { return a+b },0)>0)
+        return 'rgb(50,168,82)'
+      if(expense.map(e => parseInt(e.howMuch)).reduce((a,b) => { return a+b },0)==0)
+        return 'black'
+    }
+ 
     const months = ['Jan', 'Feb', 'Mar','Apr', 'May', 'Jun','Jul', 'Aug', 'Sep','Oct', 'Nov', 'Dec'];
-  
+
     return (      
         <div className="app_header">
             <div 
@@ -67,8 +116,9 @@ export const Header = () => {
                     Net Expense
                 </div>
                 <div 
-                  style={{ fontWeight:600 }}>
+                  style={{ fontWeight:600, color:setColorExpense(), fontSize:'150%' }}>
                     {String.fromCharCode(8377)}
+                    {Math.abs(expense.map(e => parseInt(e.howMuch)).reduce((a,b) => { return a+b },0))} 
                 </div>
               </div>
               <div 
@@ -79,8 +129,9 @@ export const Header = () => {
                       Credits
                   </div>
                   <div 
-                    style={{ fontWeight:600 }}>
+                    style={{ fontWeight:600, fontSize:'120%' }}>
                       {String.fromCharCode(8377)}
+                      {expense.filter(filterCredit).map(e => parseInt(e.howMuch)).reduce((a,b) => {return a+b},0)}    {/* new self learnt*/ }
                   </div>
                 </div>
                 <div>
@@ -89,8 +140,9 @@ export const Header = () => {
                       Debits
                   </div>
                   <div 
-                    style={{ fontWeight:600 }}>
+                    style={{ fontWeight:600, fontSize:'120%' }}>
                       {String.fromCharCode(8377)}
+                      {Math.abs(expense.filter(filterDebit).map(e => parseInt(e.howMuch)).reduce((a,b) => {return a+b},0))}
                   </div>
                 </div>
               </div>
@@ -118,6 +170,7 @@ export const Header = () => {
                           fontWeight:600, 
                           padding:'4% 2%'
                         }}
+                        value={inputHowMuch}
                         onChange={ e => setInputHowMuch(e.target.value) }
                         />
               </div>
@@ -139,6 +192,7 @@ export const Header = () => {
                                 fontWeight:600, 
                                 padding:'4% 2%'
                               }} 
+                              value={inputWhere}
                               onChange={ e => setInputWhere(e.target.value) }
                               />
               </div>
@@ -154,6 +208,7 @@ export const Header = () => {
                       className="when" 
                       required 
                       style={{ textAlign:'center', padding:'4% 2%' }}
+                      value={inputWhen}
                       onChange={ e => setInputWhen(e.target.value) }
                       />
               </div>
@@ -171,7 +226,11 @@ export const Header = () => {
                 >Credit</button>
                 <button className="debit_option" 
                         style={{ padding:'4% 18%',fontWeight:600}} 
-                        onClick={ e => setInputType('debit')}
+                        onClick={ e => {
+                          setInputType('debit');
+                          changeSign();
+                          }
+                        }
                 >Debit</button>
               </div>
               <div 
@@ -195,7 +254,13 @@ export const Header = () => {
                 onClick={addExpense}
               >Add Expense</button>
               <Link to="/expenses">
-                <button style={{ padding:'4%', fontWeight:600, width:'100%'}} className="show">Show Expenses</button>
+                <button style={{ padding:'4%', fontWeight:600, width:'100%', marginBottom:'3%'}} className="show">Show All Expenses</button>
+              </Link>
+              <Link to="/expenses/date">
+                <button style={{ padding:'4%', fontWeight:600, width:'100%', marginBottom:'3%'}} className="show">Show Expenses of Date</button>
+              </Link>
+              <Link to="/expenses/name">
+                <button style={{ padding:'4%', fontWeight:600, width:'100%'}} className="show">Show Expenses to Someone </button>
               </Link>
             </div>
             <div id="warning">{warning}</div>
