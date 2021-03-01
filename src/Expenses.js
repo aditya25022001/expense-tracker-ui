@@ -5,6 +5,8 @@ import db from './firebase';
 import MoneyRoundedIcon from '@material-ui/icons/MoneyRounded';
 import CropFreeRoundedIcon from '@material-ui/icons/CropFreeRounded';
 import Tooltip from '@material-ui/core/Tooltip'; 
+import HomeRoundedIcon from '@material-ui/icons/HomeRounded';
+import { Link } from 'react-router-dom'
 
 export const Expenses = () => {
     
@@ -24,6 +26,14 @@ export const Expenses = () => {
     },[])
     return (
         <div style={{ alignItems:'center' }} >
+          <Tooltip title="back to homepage" placement="top-start">
+            <div style={{ display:'flex', flexDirection:'row', alignItems:'center', justifyContent:'center', marginBottom:'3%' }} >
+              <Link to="/" style={{ textDecoration:'none' }} >
+                <HomeRoundedIcon style={{ color:setColor(), marginRight:'3%', marginTop:'2%' }} />
+              </Link>
+              <div style={{fontWeight:600 }} >Back Home</div>
+            </div>
+          </Tooltip>
           <div style={{ display:'flex', flexDirection:'row', justifyContent:'space-between', marginBottom:"5%" }}>
             <Tooltip title="shows physical cash transaction" placement="left-start">
               <div style={{ display:'flex', flexDirection:'row' }}>

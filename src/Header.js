@@ -246,13 +246,16 @@ export const Header = () => {
                 onClick={addExpense}
               >Add Expense</button>
               <Link to="/expenses">
-                <button style={{ padding:'4%', fontWeight:600, width:'100%', marginBottom:'3%'}} className="show">Show All Expenses</button>
+                <button style={{ padding:'4%', fontWeight:600, width:'100%', marginBottom:'3%'}} className="show">Show all expenses</button>
               </Link>
               <Link to="/expenses/date">
-                <button style={{ padding:'4%', fontWeight:600, width:'100%', marginBottom:'3%'}} className="show">Show Expenses of Date</button>
+                <button style={{ padding:'4%', fontWeight:600, width:'100%', marginBottom:'3%'}} className="show">Show expenses of date</button>
               </Link>
               <Link to="/expenses/name">
-                <button style={{ padding:'4%', fontWeight:600, width:'100%'}} className="show">Show Expenses to Someone </button>
+                <button style={{ padding:'4%', fontWeight:600, width:'100%', marginBottom:'3%'}} className="show">Show expenses to someone </button>
+              </Link>
+              <Link to="/expenses/date/range">
+                <button style={{ padding:'4%', fontWeight:600, width:'100%'}} className="show">Show expenses between Dates </button>
               </Link>
             </div>
             <div id="warning">{warning}</div>

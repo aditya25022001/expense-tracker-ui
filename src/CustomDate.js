@@ -4,7 +4,9 @@ import db from './firebase';
 import { Transaction } from './Transaction';
 import MoneyRoundedIcon from '@material-ui/icons/MoneyRounded';
 import CropFreeRoundedIcon from '@material-ui/icons/CropFreeRounded';
+import HomeRoundedIcon from '@material-ui/icons/HomeRounded';
 import Tooltip from '@material-ui/core/Tooltip'; 
+import { Link } from 'react-router-dom'
 
 export const CustomDate = () => {
     
@@ -46,16 +48,22 @@ export const CustomDate = () => {
           setwarning('Invalid entries')
       }
       else{
-          console.log(dateComp.getDate(), dateComp.getMonth(), dateComp.getFullYear(), date.slice(0,4), date.slice(5,7), date.slice(8,))
           setwarning('');
-          console.log(date)
           setExpByDate(exp.filter(filterDate));
       }
    }
 
     return (
         <div className="custom_date" >
-            <div style={{ marginBottom:'3%' }}>Enter date to search</div>
+            <Tooltip title="back to homepage" placement="top-start">
+              <div style={{ display:'flex', flexDirection:'row', alignItems:'center', justifyContent:'center' }} >
+                <Link to="/" style={{ textDecoration:'none' }} >
+                  <HomeRoundedIcon style={{ color:setColor(), marginRight:'3%', marginTop:'2%' }} />
+                </Link>
+                <div style={{fontWeight:600 }} >Back Home</div>
+              </div>
+            </Tooltip>
+            <div style={{ marginBottom:'5%', fontWeight:600 }}>Enter date to search</div>
             <div style={{ display:'flex', flexDirection:'row', marginBottom:'3%', width:'100%' }} >
                 <input type="date"  
                        className="inp_date_custom" 

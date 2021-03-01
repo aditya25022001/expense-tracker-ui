@@ -5,6 +5,8 @@ import { Transaction } from './Transaction';
 import MoneyRoundedIcon from '@material-ui/icons/MoneyRounded';
 import CropFreeRoundedIcon from '@material-ui/icons/CropFreeRounded';
 import Tooltip from '@material-ui/core/Tooltip'; 
+import HomeRoundedIcon from '@material-ui/icons/HomeRounded';
+import { Link } from 'react-router-dom'
 
 export const CustomName = () => {
 
@@ -46,7 +48,15 @@ export const CustomName = () => {
 
     return (
         <div className="custom_name">
-            <div style={{ marginBottom:'3%' }}>Enter name to search</div>
+            <Tooltip title="back to homepage" placement="top-start">
+              <div style={{ display:'flex', flexDirection:'row', alignItems:'center', justifyContent:'center'}} >
+                <Link to="/" style={{ textDecoration:'none' }} >
+                  <HomeRoundedIcon style={{ color:setColor(), marginRight:'3%', marginTop:'2%' }} />
+                </Link>
+                <div style={{fontWeight:600 }} >Back Home</div>
+              </div>
+            </Tooltip>
+            <div style={{ marginBottom:'3%', fontWeight:600 }}>Enter name to search</div>
             <div style={{ display:'flex', flexDirection:'row', marginBottom:'3%' }} >
                 <input type="text" 
                        maxLength="10" 

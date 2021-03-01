@@ -26,7 +26,9 @@
 .where,
 .when,
 .inp_name_custom,
-.inp_date_custom {
+.inp_date_custom,
+.inp_date_custom_r1,
+.inp_date_custom_r2 {
   outline: none;
   outline-offset: none;
   border: none;
@@ -48,7 +50,10 @@
 .go_date,
 .cash_option,
 .online_option,
-.show {
+.show,
+.go_date,
+.go_name,
+.go_date_range {
   border: none;
   outline: none;
   outline-offset: none;
@@ -60,8 +65,6 @@
     sans-serif;
   cursor: pointer;
 }
-.go_name:hover,
-.go_date:hover,
 .add_expense:hover,
 .credit_option:hover,
 .debit_option:hover,
@@ -78,6 +81,10 @@
 .expense_by_date {
   width: max-content;
   padding-left: 0%;
+}
+.expenses_range_date {
+  padding-left: 13%;
+  width: max-content;
 }
 .expenses {
   width: 80%;

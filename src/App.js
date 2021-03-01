@@ -4,6 +4,7 @@ import { Header } from './Header';
 import { Expenses } from './Expenses';
 import { CustomDate } from './CustomDate';
 import { CustomName } from './CustomName';
+import { CustomRangeDate } from './CustomRangeDate';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
  
 function App() {
@@ -12,6 +13,9 @@ function App() {
     <div className="App">
       <Router>
         <Switch>
+          <Route path="/expenses/date/range" exact>
+            <CustomRangeDate />
+          </Route>
           <Route path="/expenses/date" exact>
             <CustomDate />
           </Route>
