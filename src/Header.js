@@ -1,7 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import './App.css';
 import { Link } from 'react-router-dom'
-import firebase from 'firebase'
 import db from './firebase';
 
 export const Header = () => {
@@ -11,10 +10,6 @@ export const Header = () => {
     const [warning, setWarning] = useState('');
 
     const [expense, setExpense] = useState([]);
-
-    const [netCredit, setNetCredit] = useState([]);
-
-    const [netDebit, setNetDebit] = useState([]);
 
     const [inputWhere, setInputWhere] = useState('');
 
@@ -28,11 +23,8 @@ export const Header = () => {
 
     const changeSign =() => {
       let string = inputHowMuch;
-      console.log(string)
       string='-'+string
       setInputHowMuch(string)
-      console.log(string)
-      console.log(inputHowMuch)
     }
 
     const addExpense =() => {
@@ -41,15 +33,15 @@ export const Header = () => {
         ||inputMethod===''
         ||inputWhere===''
         ||inputWhen===''
-        ||(date.getMonth()+1<inputWhen.slice(5,7) && date.getFullYear()==inputWhen.slice(0,4))
-        ||(date.getDate()<inputWhen.slice(8,) && date.getMonth()+1==inputWhen.slice(5,7))
+        ||(date.getMonth()+1<inputWhen.slice(5,7) && date.getFullYear()===inputWhen.slice(0,4))
+        ||(date.getDate()<inputWhen.slice(8,) && date.getMonth()+1===inputWhen.slice(5,7))
         ||date.getFullYear()<inputWhen.slice(0,4)){
         console.log(inputType, inputMethod, inputHowMuch, inputWhen, inputWhere)
         setWarning('Please give valid details !')
       }
       else{
         db.collection('expenses').add({
-          where:inputWhere,
+          where:inputWhere.toLowerCase(),
           when:inputWhen,
           howMuch:inputHowMuch,
           method:inputMethod,
@@ -68,12 +60,12 @@ export const Header = () => {
     }
 
     const filterCredit = (e) => {
-      if(e.type=='credit')
+      if(e.type==='credit')
         return e;
     }
 
     const filterDebit = (e) => {
-      if(e.type=='debit')
+      if(e.type==='debit')
         return e;
     }
 
@@ -95,7 +87,7 @@ export const Header = () => {
         return 'rgb(252,3,3)'
       if(expense.map(e => parseInt(e.howMuch)).reduce((a,b) => { return a+b },0)>0)
         return 'rgb(50,168,82)'
-      if(expense.map(e => parseInt(e.howMuch)).reduce((a,b) => { return a+b },0)==0)
+      if(expense.map(e => parseInt(e.howMuch)).reduce((a,b) => { return a+b },0)===0)
         return 'black'
     }
  

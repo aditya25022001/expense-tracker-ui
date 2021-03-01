@@ -1,8 +1,5 @@
 import './App.css';
-import React ,{useState, useEffect} from 'react'
-import { Transaction } from './Transaction';
-import db from './firebase';
-import firebase from 'firebase';
+import React from 'react'
 import { Header } from './Header';
 import { Expenses } from './Expenses';
 import { CustomDate } from './CustomDate';

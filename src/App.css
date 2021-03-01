@@ -25,7 +25,8 @@
 .money,
 .where,
 .when,
-.inp_name_custom {
+.inp_name_custom,
+.inp_date_custom {
   outline: none;
   outline-offset: none;
   border: none;
@@ -38,11 +39,13 @@
     Roboto, Oxygen, Ubuntu, Cantarell,
     'Open Sans', 'Helvetica Neue',
     sans-serif;
-  cursor: pointer;
+  cursor: text;
 }
 .add_expense,
 .credit_option,
 .debit_option,
+.go_name,
+.go_date,
 .cash_option,
 .online_option,
 .show {
@@ -57,6 +60,8 @@
     sans-serif;
   cursor: pointer;
 }
+.go_name:hover,
+.go_date:hover,
 .add_expense:hover,
 .credit_option:hover,
 .debit_option:hover,
@@ -66,14 +71,21 @@
   background-color: rgb(224, 224, 224);
   transition-duration: 0.5s;
 }
-.transaction {
+.expense_by_name {
   width: max-content;
+  padding-left: 14%;
+}
+.expenses {
+  width: 80%;
+}
+.transaction {
+  width: 100%;
   margin-bottom: 5%;
   text-align: center;
   background-color: rgb(238, 238, 238);
   border-radius: 2px;
   padding: 8% 50%;
-  margin-left: -48%;
+  margin-left: -38%;
 }
 .home_back {
   position: sticky;
@@ -83,6 +95,11 @@
 }
 #warning {
   margin-top: 10%;
+}
+.inp_date_custom {
+  padding: 7% 2%;
+  width: 100%;
+  margin-right: 2%;
 }
 .inp_name_custom {
   padding: 7% 15%;
