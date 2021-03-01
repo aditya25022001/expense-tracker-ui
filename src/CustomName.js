@@ -36,7 +36,7 @@ export const CustomName = () => {
 
     const showExpensesByName = () => {
         if(name===''){
-            setwarning('Please enter name')
+            setwarning('Invalid entries')
         }
         else{
             setwarning('');

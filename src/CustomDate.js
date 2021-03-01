@@ -10,6 +10,8 @@ export const CustomDate = () => {
     
     const [date, setDate] = useState('');
 
+    const [warning, setwarning] = useState('');
+
     const [exp, setExp] = useState([]);
 
     const [expByDate, setExpByDate] = useState([]);
@@ -21,6 +23,36 @@ export const CustomDate = () => {
         return `rgb(${rvalue}, ${gvalue}, ${bvalue})`
     }
 
+    useEffect( () => {
+      db.collection('expenses').onSnapshot( snapshot => {
+          setExp(snapshot.docs.map( doc => doc.data()))
+      })
+    },[])
+
+    const filterDate = (e) => {
+      if(e.when===date)
+        return e;
+    }
+
+    const dateComp = new Date();
+
+    const showExpensesByDate = () => {
+      if(date==='' 
+          || (dateComp.getDate()<parseInt(date.slice(8,)) && dateComp.getMonth()+1===parseInt(date.slice(5,7)) && dateComp.getFullYear()=== parseInt(date.slice(0,4)))
+          || (dateComp.getMonth()+1<parseInt(date.slice(5,7)) && dateComp.getFullYear()===parseInt(date.slice(0,4)))
+          || (dateComp.getDate()<parseInt(date.slice(8,)) && dateComp.getMonth()+1===parseInt(date.slice(5,7)))
+          || dateComp.getFullYear()<parseInt(date.slice(0,4))
+          ){
+          setwarning('Invalid entries')
+      }
+      else{
+          console.log(dateComp.getDate(), dateComp.getMonth(), dateComp.getFullYear(), date.slice(0,4), date.slice(5,7), date.slice(8,))
+          setwarning('');
+          console.log(date)
+          setExpByDate(exp.filter(filterDate));
+      }
+   }
+
     return (
         <div className="custom_date" >
             <div style={{ marginBottom:'3%' }}>Enter date to search</div>
@@ -28,6 +60,7 @@ export const CustomDate = () => {
                 <input type="date"  
                        className="inp_date_custom" 
                        value={date} 
+                       placeholder=" "
                        onChange={e => setDate(e.target.value)} 
                 />
                 <button className="go_date" 
@@ -36,7 +69,7 @@ export const CustomDate = () => {
                         backgroundColor:'black', 
                         color:'whitesmoke' 
                         }}
-                        onClick={console.log('date')}
+                        onClick={showExpensesByDate}
                 >Go</button>
             </div>
             <div style={{ display:'flex', flexDirection:'row', justifyContent:'space-around', marginBottom:"5%" }}>
@@ -60,6 +93,18 @@ export const CustomDate = () => {
             <Tooltip title="shows credit" placement="right-start">
               <div style={{ fontWeight:600, color:'rgb(50,168,82)' }}>Credits</div>
             </Tooltip>
+          </div>
+          <div id="warning">{warning}</div>
+          <div className="expense_by_date">
+            {expByDate.map( e => (
+              <Transaction
+                howMuch={e.howMuch}
+                where={e.where}
+                when={e.when}
+                type={e.type}
+                method={e.method}
+              />
+            ))}
           </div>
         </div>
     )
